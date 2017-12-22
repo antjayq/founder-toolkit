@@ -15,6 +15,9 @@
 
     <script type="text/javascript">
       var client_language = navigator.language.toLowerCase().replace('-','_');
+      if (!client_language){
+        client_language = 'en';
+      }
       i18next.init({
         lng: client_language, // evtl. use language-detector https://github.com/i18next/i18next-browser-languageDetector
         resources: { // evtl. load via xhr https://github.com/i18next/i18next-xhr-backend
@@ -165,7 +168,9 @@
         }
       })
 
-      localize();
+      $(function() {
+        localize();
+      });
     </script>
   </body>
 </html>
