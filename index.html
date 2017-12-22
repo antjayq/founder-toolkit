@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head id="head-content">
+    <meta charset="utf-8">
+    <title data-i18n="title"></title>
+
+    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="css/checkbox.css">
+
+    <script src="locales/translations.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/8.1.0/i18next.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.0/jquery-i18next.min.js" ></script>
+    <script src="https://unpkg.com/vue"></script>
+
+    <script type="text/javascript">
+      var client_language = navigator.language.toLowerCase().replace('-','_');
+      i18next.init({
+        lng: client_language, // evtl. use language-detector https://github.com/i18next/i18next-browser-languageDetector
+        resources: { // evtl. load via xhr https://github.com/i18next/i18next-xhr-backend
+          en: {
+            translation: en_translation
+          },
+          zh_cn: {
+            translation: cns_translation
+          }
+        }
+      }, function(err, t) {
+        // for options see
+        // https://github.com/i18next/jquery-i18next#initialize-the-plugin
+        jqueryI18next.init(i18next, $);
+      });
+    </script>
+  </head>
+  <body>
+    <header id="header">
+      <span data-i18n="language"></span>:
+      <select v-model="selected_language" class="language">
+        <option value="zh_cn">Chinese (Simplified)</option>
+        <option value="en">English</option>
+      </select>
+    </header>
+
+    <div id="app" class="page-content">
+      <a href="javascipt:void(0);" v-on:click="summary_ready=false;">Page 1</a>
+      <a href="javascipt:void(0);" v-on:click="summary_ready=true;">Page 2</a>
+
+      <transition name="fade">
+        <div v-show=!summary_ready>
+          <h3 data-i18n="ten_things_message"></h3>
+          <ol>
+            <li v-for="thing in ten_things" class="todo_checkbox">
+              <label :data-i18n=thing.id></label>
+              <input type="checkbox" v-model=thing.checked :disabled=thing.disabled :id=thing.id>
+              <label :for=thing.id class="ten_things_checkbox"></label>
+            </li>
+          </ol>
+          <br>
+          <h3 data-i18n="founder_questions_message"></h3>
+          <ol>
+            <li v-for="founder_question in founder_questions">
+              <div :data-i18n=founder_question.id></div>
+              <textarea v-model.trim=founder_question.response v-on:change="has_response=true;" placeholder="" cols="80" rows="1" onfocus="this.rows='4';"></textarea>
+              <br><br>
+            </li>
+          </ol>
+          <button v-on:click='summary_ready = true;'>Continue</button>
+        </div>
+      </transition>
+
+
+      <div v-show=summary_ready>
+        <button id="print_btn" onclick='window.print();'>Print</button>
+        <h3 data-i18n="what_next"></h3>
+        <ul>
+          <li v-for="thing in ten_things" v-if=!thing.checked>
+            <label :data-i18n=thing.id></label>
+          </li>
+        </ul>
+        <br>
+        <div v-show=has_response>
+          <h3 data-i18n="founder_agreement"></h3>
+          <ul>
+            <li v-for="founder_question in founder_questions" v-if=founder_question.response>
+              {{founder_question.response}}
+            </li>
+          </ul>
+        </div>
+        <button v-on:click='summary_ready = false;'>Return</button>
+      </div>
+    </div>
+
+    <footer id="footer">
+      <div :title=text v-if="seen">
+        <span data-i18n="load_time"></span> {{load_time}}
+      </div>
+    </footer>
+
+
+
+    <script type="text/javascript">
+      function localize(){
+        $("#head-content").localize();
+        $("#header").localize();
+        $("#app").localize();
+        $("#footer").localize();
+      }
+
+      var app = new Vue({
+        el: '#app',
+        data: {
+          summary_ready: false,
+
+          ten_things_message: i18next.t("ten_things_message"),
+          ten_things: [
+            { text: i18next.t("ten_things_1"), id: "ten_things_1", checked: false, disabled: false },
+            { text: i18next.t("ten_things_2"), id: "ten_things_2", checked: false, disabled: false },
+            { text: i18next.t("ten_things_3"), id: "ten_things_3", checked: false, disabled: false },
+            { text: i18next.t("ten_things_4"), id: "ten_things_4", checked: false, disabled: false },
+            { text: i18next.t("ten_things_5"), id: "ten_things_5", checked: false, disabled: false },
+            { text: i18next.t("ten_things_6"), id: "ten_things_6", checked: false, disabled: false },
+            { text: i18next.t("ten_things_7"), id: "ten_things_7", checked: false, disabled: false },
+            { text: i18next.t("ten_things_8"), id: "ten_things_8", checked: false, disabled: false },
+            { text: i18next.t("ten_things_9"), id: "ten_things_9", checked: false, disabled: false },
+            { text: i18next.t("ten_things_10"), id: "ten_things_10", checked: false, disabled: true }
+          ],
+
+          founder_questions_message: i18next.t("founder_questions_message"),
+          founder_questions: [
+            { text: i18next.t("founder_questions_1"), id: "founder_questions_1", response: "" },
+            { text: i18next.t("founder_questions_2"), id: "founder_questions_2", response: "" },
+            { text: i18next.t("founder_questions_3"), id: "founder_questions_3", response: "" },
+            { text: i18next.t("founder_questions_4"), id: "founder_questions_4", response: "" },
+            { text: i18next.t("founder_questions_5"), id: "founder_questions_5", response: "" },
+            { text: i18next.t("founder_questions_6"), id: "founder_questions_6", response: "" },
+            { text: i18next.t("founder_questions_7"), id: "founder_questions_7", response: "" },
+            { text: i18next.t("founder_questions_8"), id: "founder_questions_8", response: "" },
+            { text: i18next.t("founder_questions_9"), id: "founder_questions_9", response: "" },
+            { text: i18next.t("founder_questions_10"), id: "founder_questions_10", response: "" },
+            { text: i18next.t("founder_questions_11"), id: "founder_questions_11", response: "" }
+          ],
+          has_response: false,
+        }
+      })
+
+      var header = new Vue({
+        el: '#header',
+        data: {
+          selected_language: client_language,
+        },
+        watch: {
+          selected_language: function (newVal) {
+            i18next.changeLanguage(newVal);
+            localize();
+          }
+        }
+      })
+
+      var footer = new Vue({
+        el: '#footer',
+        data: {
+          text: '现在你看到我了',
+          load_time: new Date().toLocaleString(),
+          seen: true
+        }
+      })
+
+      localize();
+    </script>
+  </body>
+</html>
