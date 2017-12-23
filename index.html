@@ -54,7 +54,7 @@
           <h3 data-i18n="ten_things_message"></h3>
           <ol>
             <li v-for="thing in ten_things" class="todo_checkbox">
-              <label :data-i18n=thing.id></label>
+              <label :data-i18n=thing.id class="todo_item"></label>
               <input type="checkbox" v-model=thing.checked :disabled=thing.disabled :id=thing.id>
               <label :for=thing.id class="ten_things_checkbox"></label>
             </li>
