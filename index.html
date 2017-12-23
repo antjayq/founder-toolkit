@@ -77,7 +77,7 @@
         <button id="print_btn" onclick='window.print();'>Print</button>
         <h3 data-i18n="what_next"></h3>
         <ul>
-          <li v-for="thing in ten_things" v-if=!thing.checked>
+          <li v-for="thing in ten_things" v-if=!thing.checked&&!thing.disabled>
             <label :data-i18n=thing.id></label>
           </li>
         </ul>
