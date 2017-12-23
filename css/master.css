@@ -3,6 +3,10 @@ div.page-content {
   padding: 20px;
 }
 
+.todo_item{
+  line-height: 200%;
+}
+
 button {
     border: 2px solid blue;
     border-radius: 25px;
