@@ -46,8 +46,10 @@
     </header>
 
     <div id="app" class="page-content">
-      <a href="javascipt:void(0);" v-on:click="summary_ready=false;">Page 1</a>
-      <a href="javascipt:void(0);" v-on:click="summary_ready=true;">Page 2</a>
+      <a v-on:click="summary_ready=false;">Page 1</a>
+      /
+      <a v-on:click="summary_ready=true;">Page 2</a>
+      <br>
 
       <transition name="fade">
         <div v-show=!summary_ready>
