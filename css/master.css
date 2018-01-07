@@ -21,6 +21,10 @@ button {
     font-size: 16px;
 }
 
+div#auth_profile {
+  float: right;
+}
+
 button#print_btn {
   float: right;
 }

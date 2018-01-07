@@ -70,7 +70,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Jay Q** - *Initial work* - [antjayq](https://github.com/antjayq)
+* **Jay Q 吉杰** - *Initial work* - [antjayq](https://github.com/antjayq)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
