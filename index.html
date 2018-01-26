@@ -109,7 +109,7 @@
 
           <h3 data-i18n="what_next"></h3>
           <ul>
-            <li v-for="(thing, index) in ten_things" v-if=!thing.checked&&!thing.disabled>
+            <li v-for="(thing, index) in ten_things" v-show=!thing.checked&&!thing.disabled>
               <label :data-i18n=thing.id></label>
               <input :name="'TODO #'+(index+1)" :data-i18n="'[value]' + thing.id" style="display:none;" />
             </li>
