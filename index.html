@@ -46,6 +46,13 @@
         jqueryI18next.init(i18next, $);
       });
     </script>
+    <style media="screen">
+      .fullpage {
+        width: 100%;
+        height: 600px;
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <header id="header">
@@ -57,13 +64,15 @@
     </header>
 
     <div id="app" class="page-content">
-      <a v-on:click="summary_ready=false;">Page 1</a>
+      <a v-on:click="show(1)">Startup Questions</a>
       /
-      <a v-on:click="summary_ready=true;">Page 2</a>
+      <a v-on:click="show(2)">Cofounders Agreement</a>
+      /
+      <a v-on:click="show(3)">Team Role Validation</a>
       <br>
 
       <transition name="fade">
-        <div v-show=!summary_ready>
+        <div v-show=is(1)>
           <h3 data-i18n="ten_things_message"></h3>
           <ol>
             <li v-for="thing in ten_things" class="todo_checkbox">
@@ -81,39 +90,56 @@
               <br><br>
             </li>
           </ol>
-          <button v-on:click='summary_ready = true;'>Continue</button>
+          <button v-on:click='show(2)'>Continue &#8680;</button>
         </div>
       </transition>
 
+      <div v-show=is(2)>
+        <form id="founder_agreement" action="https://formspree.io/jq@angelabor.com" method="POST">
+          <br>
+          <div class="email_section">
+            <input type="text" name="_gotcha" style="display:none" />
+            <input type="text" name="_cc" placeholder="What is your email?" />
+            <input type="hidden" name="_subject" value="9 Team Roles" />
+            <input type="submit" class="button" value="Send">
+            <input type="hidden" name="_next" value="http://antslabor.com" />
+          </div>
 
-      <div v-show=summary_ready>
-        <button id="print_btn" onclick='window.print();'>Print</button>
-        <h3 data-i18n="what_next"></h3>
-        <ul>
-          <li v-for="thing in ten_things" v-if=!thing.checked&&!thing.disabled>
-            <label :data-i18n=thing.id></label>
-          </li>
-        </ul>
-        <br>
-        <div v-show=has_response>
-          <h3 data-i18n="founder_agreement"></h3>
+          <h3 data-i18n="what_next"></h3>
           <ul>
-            <li v-for="founder_question in founder_questions" v-if=founder_question.response>
-              {{founder_question.response}}
+            <li v-for="(thing, index) in ten_things" v-if=!thing.checked&&!thing.disabled>
+              <label :data-i18n=thing.id></label>
+              <textarea :name="'TODO #'+(index+1)" :data-i18n=thing.id style="display:none;"></textarea>
             </li>
           </ul>
-        </div>
-        <button v-on:click='summary_ready = false;'>Return</button>
+          <br>
+          <div v-show=has_response>
+            <h3 data-i18n="founder_agreement"></h3>
+            <ul>
+              <li v-for="founder_question in founder_questions" v-if=founder_question.response>
+                {{founder_question.response}}
+                <input :name="founder_question.text" type="hidden" :value=founder_question.response>
+              </li>
+            </ul>
+          </div>
+        </form>
+
+        <button v-on:click='show(1)'>&#8678; Return</button>
+        <button id="print_btn" onclick='window.print();'>Print</button>
+      </div>
+
+      <div v-show=is(3)>
+        <iframe id="9roles_iframe" class="fullpage" src="http://angelabor.com"></iframe>
       </div>
     </div>
+
+
 
     <footer id="footer">
       <div :title=text v-if="seen">
         <span data-i18n="load_time"></span> {{load_time}}
       </div>
     </footer>
-
-
 
     <script type="text/javascript">
       function localize(){
@@ -125,9 +151,22 @@
 
       var app = new Vue({
         el: '#app',
+        methods: {
+          show: function (pg) {
+            if (pg == 3) {
+              document.getElementById("9roles_iframe").style.display = 'block'
+            }
+            else {
+              document.getElementById("9roles_iframe").style.display = 'none'
+            }
+            this.pg = pg
+          },
+          is: function (pg) {
+            return this.pg == pg
+          },
+        },
         data: {
-          summary_ready: false,
-
+          pg: 1,
           ten_things_message: i18next.t("ten_things_message"),
           ten_things: [
             { text: i18next.t("ten_things_1"), id: "ten_things_1", checked: false, disabled: false },

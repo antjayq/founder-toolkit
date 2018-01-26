@@ -1,7 +1,7 @@
 const cns_translation = {
   "title" : "初创智囊",
   "language" : "语言",
-  "continue" : "继续",
+  "continue" : "继续 &#8680;",
   "return" : "返回",
   "print" : "打印",
   "ten_things_message" : "开始初创公司之前的10件事:",
