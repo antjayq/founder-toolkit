@@ -7,6 +7,11 @@ a {
   text-decoration: underline;
 }
 
+ol {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 div.page-content {
   padding: 20px;
 }
@@ -32,4 +37,13 @@ input[type=text] {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: Helvetica, Arial, Sans-Serif;
+  font-size: 16px;
 }
