@@ -97,6 +97,7 @@
       <div v-show=is(2)>
         <form id="founder_agreement" action="https://formspree.io/jq@angelabor.com" method="POST">
           <br>
+          <button onclick='window.print();' class="right">Print</button>
           <div class="email_section">
             <input type="text" name="_gotcha" style="display:none" />
             <input type="text" name="_cc" placeholder="What is your email?" />
@@ -125,7 +126,7 @@
         </form>
 
         <button v-on:click='show(1)'>&#8678; Return</button>
-        <button id="print_btn" onclick='window.print();'>Print</button>
+        <button v-on:click='show(3)' class="right">Continue &#8680;</button>
       </div>
 
       <div v-show=is(3)>
