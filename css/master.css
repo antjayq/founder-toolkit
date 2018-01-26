@@ -1,3 +1,7 @@
+button.right {
+  float: right;
+}
+
 a {
   color: blue;
   text-decoration: underline;
@@ -11,16 +15,21 @@ div.page-content {
   line-height: 200%;
 }
 
-button {
-    border: 2px solid blue;
-    border-radius: 25px;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+button, input.button {
+  border: 2px solid blue;
+  border-radius: 25px;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
 
-button#print_btn {
-  float: right;
+input[type=text] {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }

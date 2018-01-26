@@ -32,7 +32,8 @@
 [type="checkbox"]:checked + label:after {
   content: '✔';
   position: absolute;
-  top: .2em; left: .275em;
+  top: .2em;
+  left: .2em;
   font-size: 1.4em;
   line-height: 0.8;
   color: #09ad7e;
