@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title data-i18n="title"></title>
+    <link rel="shortcut icon" type="image/x-icon" href="logo.png" />
 
     <link rel="stylesheet" href="css/master.css">
     <link rel="stylesheet" href="css/checkbox.css">
@@ -58,7 +59,7 @@
     <header id="header">
       <span data-i18n="language"></span>:
       <select v-model="selected_language" class="language">
-        <option value="zh_cn">Chinese (Simplified)</option>
+        <option value="zh_cn">中文简体</option>
         <option value="en">English</option>
       </select>
     </header>
@@ -90,19 +91,19 @@
               <br><br>
             </li>
           </ol>
-          <button v-on:click='show(2)'>Continue &#8680;</button>
+          <button v-on:click='show(2)' data-i18n="continue"></button>
         </div>
       </transition>
 
       <div v-show=is(2)>
         <form id="founder_agreement" action="https://formspree.io/jq@angelabor.com" method="POST">
           <br>
-          <button onclick='window.print();' class="right">Print</button>
+          <button onclick='window.print();' class="right" data-i18n="print"></button>
           <div class="email_section">
             <input type="text" name="_gotcha" style="display:none" />
             <input type="text" name="_cc" placeholder="What is your email?" />
             <input type="hidden" name="_subject" value="Cofounders Agreement" />
-            <input type="submit" class="button" value="Send">
+            <input type="submit" class="button" data-i18n="[value]send" />
             <input type="hidden" name="_next" value="http://antslabor.com" />
           </div>
 
@@ -110,7 +111,7 @@
           <ul>
             <li v-for="(thing, index) in ten_things" v-if=!thing.checked&&!thing.disabled>
               <label :data-i18n=thing.id></label>
-              <textarea :name="'TODO #'+(index+1)" :data-i18n=thing.id style="display:none;"></textarea>
+              <input :name="'TODO #'+(index+1)" :data-i18n="'[value]' + thing.id" style="display:none;" />
             </li>
           </ul>
           <br>
@@ -119,14 +120,15 @@
             <ul>
               <li v-for="founder_question in founder_questions" v-if=founder_question.response>
                 {{founder_question.response}}
-                <input :name="founder_question.text" type="hidden" :value=founder_question.response>
+                <input :name="founder_question.text" type="hidden" :value="'  ' + founder_question.response">
               </li>
             </ul>
           </div>
         </form>
+        <br>
 
-        <button v-on:click='show(1)'>&#8678; Return</button>
-        <button v-on:click='show(3)' class="right">Continue &#8680;</button>
+        <button v-on:click='show(1)' data-i18n="return"></button>
+        <button v-on:click='show(3)' data-i18n="continue" class="right"></button>
       </div>
 
       <div v-show=is(3)>

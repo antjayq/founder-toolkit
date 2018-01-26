@@ -1,9 +1,10 @@
 const en_translation = {
   "title" : "Founder's Toolkit",
   "language" : "Language",
-  "continue" : "Continue &#8680;",
+  "continue" : "Continue",
   "return" : "Return",
   "print" : "Print",
+  "send" : "Send",
   "ten_things_message" : "10 things before starting a startup:",
 	"ten_things_1" : "Clear purpose of the business",
 	"ten_things_2" : "Prepare to commit 10 years",
