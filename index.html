@@ -63,8 +63,9 @@
         <option value="en">English</option>
       </select>
     </header>
+    <br>
 
-    <div id="app" class="page-content">
+    <div id="app">
       <a v-on:click="show(1)">Startup Questions</a>
       /
       <a v-on:click="show(2)">Cofounders Agreement</a>
@@ -73,7 +74,7 @@
       <br>
 
       <transition name="fade">
-        <div v-show=is(1)>
+        <div v-show=is(1) class="page-content">
           <h3 data-i18n="ten_things_message"></h3>
           <ol>
             <li v-for="thing in ten_things" class="todo_checkbox">
@@ -87,7 +88,7 @@
           <ol>
             <li v-for="founder_question in founder_questions">
               <div :data-i18n=founder_question.id></div>
-              <textarea v-model.trim=founder_question.response v-on:change="has_response=true;" placeholder="" cols="80" rows="1" onfocus="this.rows='4';"></textarea>
+              <textarea v-model.trim=founder_question.response v-on:change="has_response=true;" placeholder="" rows="1" onfocus="this.rows='4';"></textarea>
               <br><br>
             </li>
           </ol>
@@ -95,7 +96,7 @@
         </div>
       </transition>
 
-      <div v-show=is(2)>
+      <div v-show=is(2) class="page-content">
         <form id="founder_agreement" action="https://formspree.io/jq@angelabor.com" method="POST">
           <br>
           <button onclick='window.print();' class="right" data-i18n="print"></button>
@@ -136,8 +137,6 @@
         <iframe id="9roles_iframe" class="fullpage" src="http://angelabor.com"></iframe>
       </div>
     </div>
-
-
 
     <footer id="footer">
       <div :title=text v-if="seen">
