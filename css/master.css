@@ -1,5 +1,6 @@
-button.right {
+.right {
   float: right;
+  display: inline-block;
 }
 
 a {
@@ -46,4 +47,9 @@ textarea {
   box-sizing: border-box;
   font-family: Helvetica, Arial, Sans-Serif;
   font-size: 16px;
+}
+
+#paypalBtn {
+  width: 100px;
+  height: 100px;
 }

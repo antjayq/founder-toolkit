@@ -30,6 +30,9 @@
       if (!client_language || client_language.indexOf('en') >= 0){
         client_language = 'en';
       }
+      if (client_language != 'en'){
+        client_language = 'zh_cn';
+      }
 
       i18next.init({
         lng: client_language, // evtl. use language-detector https://github.com/i18next/i18next-browser-languageDetector
@@ -69,8 +72,8 @@
       <a v-on:click="show(1)">Startup Questions</a>
       /
       <a v-on:click="show(2)">Cofounders Agreement</a>
-      /
-      <a v-on:click="show(3)">Team Role Validation</a>
+      <!-- /
+      <a v-on:click="show(3)">Team Role Validation</a> -->
       <br>
 
       <transition name="fade">
@@ -129,13 +132,18 @@
         <br>
 
         <button v-on:click='show(1)' data-i18n="return"></button>
-        <button v-on:click='show(3)' data-i18n="continue" class="right"></button>
+        <form class="right" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+          <input type="hidden" name="cmd" value="_s-xclick">
+          <input type="hidden" name="hosted_button_id" value="F3GPHYZTJYZ5G">
+          <input id="paypalBtn" type="image" src="http://cycling4gaza.com/wp-content/uploads/2010/07/Donate.png" border="0" name="submit">
+        </form>
+        <!-- <button v-on:click='show(3)' data-i18n="continue" class="right"></button> -->
       </div>
 
-      <div v-show=is(3)>
+      <!-- <div v-show=is(3)>
         <br>
         <iframe id="9roles_iframe" class="fullpage" src="http://angelabor.com"></iframe>
-      </div>
+      </div> -->
     </div>
 
     <footer id="footer">
@@ -156,12 +164,12 @@
         el: '#app',
         methods: {
           show: function (pg) {
-            if (pg == 3) {
-              document.getElementById("9roles_iframe").style.display = 'block'
-            }
-            else {
-              document.getElementById("9roles_iframe").style.display = 'none'
-            }
+            // if (pg == 3) {
+            //   document.getElementById("9roles_iframe").style.display = 'block'
+            // }
+            // else {
+            //   document.getElementById("9roles_iframe").style.display = 'none'
+            // }
             this.pg = pg
           },
           is: function (pg) {
